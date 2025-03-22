@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Münib Akar | Cybersecurity & Software Engineer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-effects">
+        <canvas class="matrix-effect" id="matrix-canvas"></canvas>
+        <div class="overlay"></div>
+    </div>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">MA_</div>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="skills.html">Skills</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="hero-section">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="glitch" data-text="Münib Akar">Münib Akar</h1>
+                    <div class="hero-subtitle">
+                        <span class="terminal-prefix">$</span>
+                        <span class="typing-text"></span>
+                        <span class="typing-cursor">_</span>
+                    </div>
+                    <p class="hero-description">
+                        Software Engineering student specialized in <span class="accent">cybersecurity</span> and <span class="accent">web development</span>. 
+                        Passionate about secure coding practices and ethical hacking.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="projects.html" class="btn btn-primary">
+                            <i class="fas fa-code"></i> View Projects
+                        </a>
+                        <a href="contact.html" class="btn btn-secondary">
+                            <i class="fas fa-paper-plane"></i> Contact Me
+                        </a>
+
+                        
+                    </div>
+                </div>
+                <div class="hero-terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-buttons">
+                            <span class="terminal-btn close"></span>
+                            <span class="terminal-btn minimize"></span>
+                            <span class="terminal-btn maximize"></span>
+                        </div>
+                        <div class="terminal-title">munib@kali:~</div>
+                    </div>
+                    <div class="terminal-body" id="terminalBody">
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">munib@kali:~$</span> 
+                            <span class="terminal-command">whoami</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-output">Münib Akar - Software Engineering Student</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">munib@kali:~$</span> 
+                            <span class="terminal-command">cat skills.txt</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-output">Cybersecurity | Python | Java | Golang | Node.js |</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">munib@kali:~$</span> 
+                            <span class="terminal-command">./get_projects.sh</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-output">Loading projects...</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-output">> Pre-Pair Website</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-output">> SpeedScroll Navigation App</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-output">> Age & Gender Detection AI</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">munib@kali:~$</span> 
+                            <span class="terminal-command">contact --email</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-output">munibakarr@gmail.com</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">munib@kali:~$</span> 
+                            <span class="terminal-cursor">_</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-section">
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number" data-count="10">0</div>
+                    <div class="stat-label">Projects</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="3">0</div>
+                    <div class="stat-label">Years Coding</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="5">0</div>
+                    <div class="stat-label">Certifications</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="3">0</div>
+                    <div class="stat-label">Internships</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- <section class="featured-section">
+            <h2><span class="accent">{</span> Featured Projects <span class="accent">}</span></h2>
+            <div class="featured-projects">
+                <div class="featured-project">
+                    <div class="project-image">
+                        <div class="image-placeholder">
+                            <i class="fas fa-code"></i>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Pre-Pair Website</h3>
+                        <p>A comprehensive website designed for students to prepare for university exams. Features interactive study materials, practice tests, and a forum for student discussions.</p>
+                        <div class="project-tech">
+                            <span>JavaScript</span>
+                            <span>PHP</span>
+                            <span>MySQL</span>
+                            <span>CSS</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="btn btn-sm">View Project</a>
+                            <a href="#" class="btn btn-sm btn-secondary">
+                                <i class="fab fa-github"></i> Source Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="featured-project">
+                    <div class="project-image">
+                        <div class="image-placeholder">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>SpeedScroll Navigation App</h3>
+                        <p>A mobile application that provides navigation assistance with a focus on speed optimization and traffic avoidance. Utilizes real-time data to suggest the fastest routes.</p>
+                        <div class="project-tech">
+                            <span>Flutter</span>
+                            <span>Dart</span>
+                            <span>Google Maps API</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="btn btn-sm">View Project</a>
+                            <a href="#" class="btn btn-sm btn-secondary">
+                                <i class="fab fa-github"></i> Source Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="view-all-container">
+                <a href="projects.html" class="btn btn-outline">
+                    View All Projects <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </section> -->
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; <span id="year">2023</span> Münib Akar | <span class="typing-cursor">_</span></p>
+                <div class="footer-links">
+                    <a href="about.html">About</a>
+                    <a href="skills.html">Skills</a>
+                    <a href="projects.html">Projects</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html> 

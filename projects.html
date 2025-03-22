@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Münib Akar</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Additional styles for projects page */
+        .projects-section {
+            margin-top: 60px;
+        }
+        
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 30px 0;
+            gap: 15px;
+        }
+        
+        .filter-btn {
+            background-color: transparent;
+            color: var(--text-secondary);
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: var(--terminal-font);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background-color: rgba(0, 255, 65, 0.1);
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .project-card {
+            background-color: rgba(6, 13, 31, 0.7);
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(0, 255, 65, 0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.15);
+            border-color: var(--primary-color);
+        }
+        
+        .project-image {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio (9 / 16 = 0.5625 = 56.25%) */
+            overflow: hidden;
+        }
+        
+        .project-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(50%);
+            transition: all 0.5s ease;
+        }
+        
+        .project-card:hover .project-image img {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+        
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(6, 13, 31, 0.9));
+        }
+        
+        .project-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-title {
+            color: var(--text-primary);
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .project-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .tech-tag {
+            background-color: rgba(0, 255, 65, 0.1);
+            color: var(--primary-color);
+            padding: 3px 10px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            font-family: var(--terminal-font);
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 15px;
+            margin-top: auto;
+        }
+        
+        .project-link {
+            background-color: transparent;
+            color: var(--text-primary);
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            padding: 8px 15px;
+            border-radius: 3px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--terminal-font);
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+        
+        .project-link:hover {
+            background-color: rgba(0, 255, 65, 0.1);
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .project-status {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: var(--primary-color);
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-family: var(--terminal-font);
+            font-size: 0.8rem;
+            z-index: 10;
+        }
+        
+        .status-active {
+            background-color: rgba(0, 255, 65, 0.2);
+        }
+        
+        .status-completed {
+            background-color: rgba(100, 255, 218, 0.2);
+            color: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="background-effects">
+        <div class="matrix-effect" id="matrix-canvas"></div>
+        <div class="overlay"></div>
+    </div>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">MA_</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="skills.html">Skills</a></li>
+                    <li><a href="projects.html" class="active">Projects</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="projects-section">
+            <div class="container">
+                <h2><span class="accent">{</span> My Projects <span class="accent">}</span></h2>
+                <div class="project-tabs" data-aos="fade-up">
+                    <div class="filter-tabs">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="web">Web Dev</button>
+                        <button class="filter-btn" data-filter="mobile">Mobile</button>
+                        <button class="filter-btn" data-filter="ai">AI/ML</button>
+                        <button class="filter-btn" data-filter="cybersecurity">Cybersecurity</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="projects-grid">
+
+                <div class="project-card" data-category="all" data-aos="fade-up" data-aos-delay="200">
+                    <div class="project-status status-active">Active</div>
+                    <div class="project-image">
+                        <img src="assets/project-virtus.jpg" alt="Virtus R&D">
+                        <div class="project-overlay"></div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Volunteer Internship - Virtus R&D</h3>
+                        <p class="project-description">
+                            I am currently working to contribute to backend development of three mobile projects, ensuring high quality user experiences and performance.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Mobile Development</span>
+                            <span class="tech-tag">Backend Development</span>
+                            <span class="tech-tag">Golang</span>
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">UI/UX</span>
+                            
+                        </div>
+                        <!-- <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fas fa-info-circle"></i> More Info
+                            </a>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="project-card" data-category="all" data-aos="fade-up" data-aos-delay="100">
+                    <div class="project-status status-completed">Completed</div>
+                    <div class="project-image">
+                        <img src="assets/project-mugla-sitki-kocman-university.jpg" alt="Hospital Website">
+                        <div class="project-overlay"></div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Internship - Muğla Sıtkı Koçman University</h3>
+                        <p class="project-description">
+                            Developed a website for medical use in collaboration with professors from both the Faculty of Medicine and the Faculty of Engineering. Currently conducting research on emotion-AI applications in healthcare settings.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">HTML/CSS</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">AI</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://duygutanimatesti.com.tr/" class="project-link">
+                                <i class="fas fa-external-link-alt"></i> View Site
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+  
+                
+                 <div class="project-card" data-category="cybersecurity" data-aos="fade-up" data-aos-delay="200">
+                    <div class="project-status status-completed">Completed</div>                    <div class="project-image">
+                        <img src="assets/project-acunmedya-akademi.jpg" alt="Virtus R&D">
+                        <div class="project-overlay"></div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Volunteer Internship - Acunmedya Akademi</h3>
+                        <p class="project-description">
+                            I am participating in a voluntary internship as part of the Cybersecurity Expertise training at Acunmedya Academy.  
+                            In addition to theoretical learning, I am enhancing my practical skills through hands-on exercises.                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Cybersecurity</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Network</span>
+                            <span class="tech-tag">Ethical Hacking</span>
+                            <span class="tech-tag">Web Security</span>
+                        </div>
+                        <!-- <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fas fa-info-circle"></i> More Info
+                            </a>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="project-card" data-category="web" data-aos="fade-up" data-aos-delay="300">
+                    <div class="project-status status-completed">Completed</div>
+                    <div class="project-image">
+                        <img src="assets/project-prepair.jpg" alt="Pre-Pair Project">
+                        <div class="project-overlay"></div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Website Project - Pre-Pair</h3>
+                        <p class="project-description">
+                            Pre-Pair is a matchmaking platform designed to bring together people who enjoy playing games. 
+                            In this project, we developed the frontend using HTML, JavaScript, and CSS, the database with Firebase, and the backend using Python Flask.                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python/Flask</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">HTML/CSS</span>
+                            <span class="tech-tag">Firebase</span>
+                        </div>
+                        <!-- <div class="project-links">
+                            <a href="https://github.com/munibakar/PRE-PAIR-PROJECT" class="project-link">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+
+                        </div> -->
+                    </div>
+                </div>
+                
+                <div class="project-card" data-category="mobile" data-aos="fade-up" data-aos-delay="400">
+                    <div class="project-status status-completed">Completed</div>
+                    <div class="project-image">
+                        <img src="assets/project-speedscroll.jpg" alt="SpeedScroll App">
+                        <div class="project-overlay"></div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Mobile Application - SpeedScroll</h3>
+                        <p class="project-description">
+                            Speed Scroll is an application that provides information on the shortest time-based route between two points. 
+                            In this project, we developed the application using Flutter.                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">Dart</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">Google Maps API</span>
+                        </div>
+                        <!-- <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i> Demo
+                            </a>
+                        </div> -->
+                    </div>
+                </div>
+                
+                <div class="project-card" data-category="web" data-aos="fade-up" data-aos-delay="500">
+                    <div class="project-status status-completed">Completed</div>
+                    <div class="project-image">
+                        <img src="assets/project-matematik.jpg" alt="Matematik Kulübü">
+                        <div class="project-overlay"></div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Website Project - Matematik Kulübü</h3>
+                        <p class="project-description">
+                            Matematik Kulübü is a learning platform for middle and high school students. 
+                            In this project, we developed the frontend using HTML, JavaScript, and CSS, the database with Firebase, and the backend using Node.js.                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">HTML/CSS</span>
+                            <span class="tech-tag">Firebase</span>
+                        </div>
+                        <div class="project-links">
+                            <!-- <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> Code
+                            </a> -->
+                            <a href="https://matematikulubu.com/" class="project-link">
+                                <i class="fas fa-external-link-alt"></i> View Site
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-category="mobile" data-aos="fade-up" data-aos-delay="600">
+                    <div class="project-status status-completed">Completed</div>
+                    <div class="project-image">
+                        <img src="assets/project-audivo.jpg" alt="Audivo App">
+                        <div class="project-overlay"></div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Mobile Application - Audivo</h3>
+                        <p class="project-description">
+                            We developed a mobile application that assesses hearing abilities through emotion recognition tests, using Flutter & Dart.                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">Dart</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">Audio Processing</span>
+                            <span class="tech-tag">Emotion Analysis</span>
+                        </div>
+                        <!-- <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-mobile-alt"></i> App Demo
+                            </a>
+                        </div> -->
+                    </div>
+                </div>
+                
+                <div class="project-card" data-category="ai" data-aos="fade-up" data-aos-delay="700">
+                    <div class="project-status status-completed">Complated</div>
+                    <div class="project-image">
+                        <img src="assets/project-age-detection.jpg" alt="Age Detection">
+                        <div class="project-overlay"></div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">AI Project - Age and Gender Detection</h3>
+                        <p class="project-description">
+                            In this project, I developed the model using Python and CNN. This project includes a Convolutional Neural Network (CNN) model that predicts the age and gender of a person using the UTKFace dataset. 
+                            The model has two separate output layers to predict age and gender simultaneously.                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">TensorFlow</span>
+                            <span class="tech-tag">Computer Vision</span>
+                            <span class="tech-tag">CNN</span>
+                        </div>
+                        <!-- <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> Repository
+                            </a>
+                        </div> -->
+                    </div>
+                </div>
+                
+                <div class="project-card" data-category="web" data-aos="fade-up" data-aos-delay="800">
+                    <div class="project-status status-active">In Development</div>
+                    <div class="project-image">
+                        <img src="assets/project-crypto.jpg" alt="Crypto Analysis">
+                        <div class="project-overlay"></div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Crypto Analysis Platform</h3>
+                        <p class="project-description">
+                            I am building an AI-powered platform that visualizes cryptocurrency trends and generates trading predictions based on market analysis.
+                             The project integrates findings from financial forecasting research to develop accurate prediction models, helping users make informed investment decisions through intuitive data visualizations.                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">AI</span>
+                            <span class="tech-tag">Financial Forecasting</span>
+                            <span class="tech-tag">Data Analysis</span>
+                            <span class="tech-tag">Machine Learning</span>
+                        </div>
+                        <!-- <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> Repository
+                            </a>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; <span id="year">2025</span> Münib Akar | <span class="typing-cursor">_</span></p>
+                <div class="footer-links">
+                    <a href="about.html">About</a>
+                    <a href="skills.html">Skills</a>
+                    <a href="projects.html">Projects</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <script>
+        // Project filtering
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterBtns.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Get filter value
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    // Filter projects
+                    projectCards.forEach(card => {
+                        if (filterValue === 'all') {
+                            card.style.display = 'block';
+                        } else {
+                            const categories = card.getAttribute('data-category').split(' ');
+                            if (categories.includes(filterValue)) {
+                                card.style.display = 'block';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+            });
+        });
+
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            offset: 100
+        });
+    </script>
+</body>
+</html> 

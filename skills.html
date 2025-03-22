@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills | Münib Akar</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Additional styles for skills page */
+        .skills-section {
+            margin-top: 60px;
+        }
+        
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .skill-card {
+            background-color: rgba(6, 13, 31, 0.7);
+            border-radius: 5px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+            border: 1px solid rgba(0, 255, 65, 0.1);
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.1);
+            border-color: var(--primary-color);
+        }
+        
+        .skill-header {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid rgba(0, 255, 65, 0.1);
+        }
+        
+        .skill-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .skill-title {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .skill-body {
+            padding: 20px;
+        }
+        
+        .skill-level {
+            margin-bottom: 15px;
+        }
+        
+        .skill-level-text {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .skill-level-text span {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .skill-level-bar {
+            height: 6px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .skill-level-fill {
+            height: 100%;
+            background-color: var(--primary-color);
+            border-radius: 3px;
+            transition: width 1.5s ease;
+        }
+        
+        .skill-details {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .skill-tag {
+            background-color: rgba(0, 255, 65, 0.1);
+            color: var(--primary-color);
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            font-family: var(--terminal-font);
+        }
+        
+        .other-skills {
+            margin-top: 80px;
+        }
+        
+        .other-skills h3 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--text-primary);
+            text-align: center;
+            position: relative;
+        }
+        
+        .other-skills h3::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), transparent);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .skill-item {
+            background-color: rgba(6, 13, 31, 0.7);
+            border-radius: 5px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .skill-item:hover {
+            border-left-color: var(--primary-color);
+            transform: translateX(5px);
+        }
+        
+        .skill-item i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+        
+        .skill-item-content h4 {
+            color: var(--text-primary);
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+        
+        .skill-item-content p {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            margin-bottom: 0;
+        }
+        
+        .languages-section {
+            margin-top: 80px;
+        }
+        
+        .languages-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        
+        .language-card {
+            background-color: rgba(6, 13, 31, 0.7);
+            border-radius: 5px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 200px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 255, 65, 0.1);
+        }
+        
+        .language-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-color);
+        }
+        
+        .language-flag {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 15px;
+            border: 2px solid var(--primary-color);
+        }
+        
+        .language-flag img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .language-name {
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .language-level {
+            color: var(--primary-color);
+            font-family: var(--terminal-font);
+            font-size: 0.9rem;
+            background-color: rgba(0, 255, 65, 0.1);
+            padding: 3px 10px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-effects">
+        <div class="matrix-effect" id="matrix-canvas"></div>
+        <div class="overlay"></div>
+    </div>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">MA_</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="skills.html" class="active">Skills</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="skills-section">
+            <div class="container">
+                <h2><span class="accent">{</span> Technical Skills <span class="accent">}</span></h2>
+                <div class="skills-grid">
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="skill-header">
+                            <div class="skill-icon">
+                                <i class="fab fa-python"></i>
+                            </div>
+                            <div class="skill-title">Python</div>
+                        </div>
+                        <div class="skill-body">
+                            <div class="skill-level">
+                                <div class="skill-level-text">
+                                    <span>Level</span>
+                                    <span>Intermediate to Advanced</span>
+                                </div>
+                                <div class="skill-level-bar">
+                                    <div class="skill-level-fill" style="width: 80%;"></div>
+                                </div>
+                            </div>
+                            <!-- <div class="skill-details">
+                                Proficient in Python programming for various applications including data analysis, web development, and automation.
+                            </div> -->
+                            <div class="skill-tags">
+                                <span class="skill-tag">Data Analysis</span>
+                                <span class="skill-tag">Web Development</span>
+                                <span class="skill-tag">Automation</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="skill-header">
+                            <div class="skill-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="skill-title">Cyber Security</div>
+                        </div>
+                        <div class="skill-body">
+                            <div class="skill-level">
+                                <div class="skill-level-text">
+                                    <span>Level</span>
+                                    <span>Intermediate</span>
+                                </div>
+                                <div class="skill-level-bar">
+                                    <div class="skill-level-fill" style="width: 70%;"></div>
+                                </div>
+                            </div>
+                            <!-- <div class="skill-details">
+                                Knowledge of security principles, penetration testing techniques, and vulnerability assessment.
+                            </div> -->
+                            <div class="skill-tags">
+                                <span class="skill-tag">Network Security</span>
+                                <span class="skill-tag">Web Security</span>
+                                <span class="skill-tag">Ethical Hacking</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="skill-header">
+                            <div class="skill-icon">
+                                <i class="fab fa-node-js"></i>
+                            </div>
+                            <div class="skill-title">Node.js</div>
+                        </div>
+                        <div class="skill-body">
+                            <div class="skill-level">
+                                <div class="skill-level-text">
+                                    <span>Level</span>
+                                    <span>Intermediate</span>
+                                </div>
+                                <div class="skill-level-bar">
+                                    <div class="skill-level-fill" style="width: 80%;"></div>
+                                </div>
+                            </div>
+                            <!-- <div class="skill-details">
+                                Strong understanding of JavaScript for client-side and server-side development. Familiar with modern frameworks.
+                            </div> -->
+                            <div class="skill-tags">
+                                <span class="skill-tag">Express</span>
+                                <span class="skill-tag">REST APIs</span>
+                                <span class="skill-tag">Web Development</span>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="skill-header">
+                            <div class="skill-icon">
+                                <i class="fab fa-golang"></i>
+                            </div>
+                            <div class="skill-title">Go</div>
+                        </div>
+                        <div class="skill-body">
+                            <div class="skill-level">
+                                <div class="skill-level-text">
+                                    <span>Level</span>
+                                    <span>Intermediate</span>
+                                </div>
+                                <div class="skill-level-bar">
+                                    <div class="skill-level-fill" style="width: 80%;"></div>
+                                </div>
+                            </div>
+                            <!-- <div class="skill-details">
+                                Strong understanding of JavaScript for client-side and server-side development. Familiar with modern frameworks.
+                            </div> -->
+                            <div class="skill-tags">
+                                <span class="skill-tag">Web Development</span>
+                                <span class="skill-tag">Microservices</span>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="skill-header">
+                            <div class="skill-icon">
+                                <i class="fab fa-js"></i>
+                            </div>
+                            <div class="skill-title">JavaScript</div>
+                        </div>
+                        <div class="skill-body">
+                            <div class="skill-level">
+                                <div class="skill-level-text">
+                                    <span>Level</span>
+                                    <span>Intermediate to Advanced</span>
+                                </div>
+                                <div class="skill-level-bar">
+                                    <div class="skill-level-fill" style="width: 80%;"></div>
+                                </div>
+                            </div>
+                            <!-- <div class="skill-details">
+                                Strong understanding of JavaScript for client-side and server-side development. Familiar with modern frameworks.
+                            </div> -->
+                            <div class="skill-tags">
+                                <span class="skill-tag">DOM Manipulation</span>
+                                <span class="skill-tag">Async/Await</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="skill-header">
+                            <div class="skill-icon">
+                                <i class="fab fa-java"></i>
+                            </div>
+                            <div class="skill-title">Java</div>
+                        </div>
+                        <div class="skill-body">
+                            <div class="skill-level">
+                                <div class="skill-level-text">
+                                    <span>Level</span>
+                                    <span>Intermediate</span>
+                                </div>
+                                <div class="skill-level-bar">
+                                    <div class="skill-level-fill" style="width: 65%;"></div>
+                                </div>
+                            </div>
+                            <!-- <div class="skill-details">
+                                Experience with React for building dynamic and responsive user interfaces and single-page applications.
+                            </div> -->
+                            <div class="skill-tags">
+                                <span class="skill-tag">Components</span>
+                                <span class="skill-tag">OOP</span>
+                                <span class="skill-tag">State Management</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="500">
+                        <div class="skill-header">
+                            <div class="skill-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <div class="skill-title">PostgreSQL</div>
+                        </div>
+                        <div class="skill-body">
+                            <div class="skill-level">
+                                <div class="skill-level-text">
+                                    <span>Level</span>
+                                    <span>Intermediate</span>
+                                </div>
+                                <div class="skill-level-bar">
+                                    <div class="skill-level-fill" style="width: 70%;"></div>
+                                </div>
+                            </div>
+                            <!-- <div class="skill-details">
+                                Knowledge of database design, SQL queries, and database management systems.
+                            </div> -->
+                            <div class="skill-tags">
+                                <span class="skill-tag">SQL</span>
+                                <span class="skill-tag">Database Design</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="600">
+                        <div class="skill-header">
+                            <div class="skill-icon">
+                                <i class="fab fa-php"></i>
+                            </div>
+                            <div class="skill-title">Linux</div>
+                        </div>
+                        <div class="skill-body">
+                            <div class="skill-level">
+                                <div class="skill-level-text">
+                                    <span>Level</span>
+                                    <span>Intermediate</span>
+                                </div>
+                                <div class="skill-level-bar">
+                                    <div class="skill-level-fill" style="width: 65%;"></div>
+                                </div>
+                            </div>
+                            <!-- <div class="skill-details">
+                                Proficient in Linux system administration, shell scripting, and network configuration.
+                            </div> -->
+                            <div class="skill-tags">
+                                <span class="skill-tag">System Administration</span>
+                                <span class="skill-tag">Shell Scripting</span>
+                                <span class="skill-tag">Networking</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="other-skills">
+                <div class="container">
+                    <h2><span class="accent">{</span> Other Skills <span class="accent">}</span></h2>
+                    <div class="other-skills-list" data-aos="fade-up" data-aos-delay="100">
+                        <div class="skill-item">
+                            <i class="fab fa-html5"></i>
+                            <div class="skill-item-content">
+                                <h4>HTML/CSS</h4>
+                                <p>Intermediate to Advanced</p>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <i class="fas fa-paint-brush"></i>
+                            <div class="skill-item-content">
+                                <h4>UI/UX</h4>
+                                <p>Intermediate</p>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <i class="fab fa-flutter"></i>
+                            <div class="skill-item-content">
+                                <h4>Flutter</h4>
+                                <p>Beginner to Intermediate</p>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <i class="fas fa-brain"></i>
+                            <div class="skill-item-content">
+                                <h4>AI/ML</h4>
+                                <p>Basic knowledge</p>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <i class="fas fa-eye"></i>
+                            <div class="skill-item-content">
+                                <h4>Computer Vision</h4>
+                                <p>Basic knowledge</p>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <i class="fas fa-server"></i>
+                            <div class="skill-item-content">
+                                <h4>Server Management</h4>
+                                <p>Basic knowledge</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="languages-section">
+                <div class="container">
+                    <h2><span class="accent">{</span> Languages <span class="accent">}</span></h2>
+                    <div class="language-items" data-aos="fade-up" data-aos-delay="100">
+                        <div class="language-card">
+                            <div class="language-flag">
+                                <i class="fas fa-flag" style="font-size: 30px; color: var(--primary-color); line-height: 60px; text-align: center; width: 100%;"></i>
+                            </div>
+                            <div class="language-name">English</div>
+                            <div class="language-level">Intermediate</div>
+                        </div>
+                        
+                        <div class="language-card">
+                            <div class="language-flag">
+                                <i class="fas fa-flag" style="font-size: 30px; color: var(--primary-color); line-height: 60px; text-align: center; width: 100%;"></i>
+                            </div>
+                            <div class="language-name">Turkish</div>
+                            <div class="language-level">Native</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; <span id="year">2025</span> Münib Akar | <span class="typing-cursor">_</span></p>
+                <div class="footer-links">
+                    <a href="about.html">About</a>
+                    <a href="skills.html">Skills</a>
+                    <a href="projects.html">Projects</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            offset: 100
+        });
+    </script>
+</body>
+</html> 

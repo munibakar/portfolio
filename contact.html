@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Münib Akar</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Additional styles for contact page */
+        .contact-section {
+            margin-top: 60px;
+            position: relative;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .contact-info {
+            background-color: rgba(6, 13, 31, 0.7);
+            padding: 30px;
+            border-radius: 5px;
+            border-left: 3px solid var(--primary-color);
+        }
+        
+        .contact-info-title {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .contact-details {
+            margin-top: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .contact-item i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-top: 3px;
+        }
+        
+        .contact-item-content {
+            flex: 1;
+        }
+        
+        .contact-item-content h4 {
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .contact-item-content p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+        
+        .contact-social {
+            margin-top: 30px;
+        }
+        
+        .contact-social h4 {
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 255, 65, 0.1);
+            color: var(--primary-color);
+            border-radius: 50%;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+        
+        .social-link:hover {
+            background-color: transparent;
+            color: var(--text-primary);
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .contact-form {
+            background-color: rgba(6, 13, 31, 0.7);
+            padding: 30px;
+            border-radius: 5px;
+            border-left: 3px solid var(--primary-color);
+        }
+        
+        .form-title {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-family: var(--terminal-font);
+            font-size: 0.9rem;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 65, 0.2);
+            border-radius: 3px;
+            color: var(--text-primary);
+            font-family: var(--terminal-font);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(0, 255, 65, 0.1);
+        }
+        
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 12px 25px;
+            border-radius: 3px;
+            font-family: var(--terminal-font);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .submit-btn:hover {
+            background-color: rgba(0, 255, 65, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .form-message {
+            margin-top: 20px;
+            padding: 10px 15px;
+            border-radius: 3px;
+            font-family: var(--terminal-font);
+            font-size: 0.9rem;
+            display: none;
+        }
+        
+        .form-message.success {
+            background-color: rgba(0, 255, 65, 0.1);
+            color: var(--primary-color);
+            border: 1px solid rgba(0, 255, 65, 0.3);
+        }
+        
+        .form-message.error {
+            background-color: rgba(255, 82, 82, 0.1);
+            color: #ff5252;
+            border: 1px solid rgba(255, 82, 82, 0.3);
+        }
+        
+        /* Decorative elements */
+        .code-decoration {
+            position: absolute;
+            font-family: var(--terminal-font);
+            font-size: 0.8rem;
+            color: rgba(0, 255, 65, 0.15);
+            user-select: none;
+            z-index: -1;
+        }
+        
+        .code-top-left {
+            top: 30px;
+            left: 0;
+        }
+        
+        .code-bottom-right {
+            bottom: 30px;
+            right: 0;
+        }
+        
+        /* Alert System */
+        .alert {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            max-width: 350px;
+            background-color: #1a1a1a;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+        }
+        
+        .alert.show {
+            transform: translateX(0);
+        }
+        
+        .alert.success {
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .alert.error {
+            border-left: 4px solid #ff5252;
+        }
+        
+        .alert-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+        }
+        
+        .alert-content span {
+            color: var(--text-primary);
+            font-family: var(--terminal-font);
+            font-size: 0.9rem;
+        }
+        
+        .alert-close {
+            color: var(--text-secondary);
+            cursor: pointer;
+            margin-left: 15px;
+        }
+        
+        .alert-close:hover {
+            color: var(--text-primary);
+        }
+        
+        @media (max-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .code-decoration {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-effects">
+        <div class="matrix-effect" id="matrix-canvas"></div>
+        <div class="overlay"></div>
+    </div>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">MA_</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="skills.html">Skills</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="contact-section">
+            <div class="container">
+                <h2><span class="accent">{</span> Get in Touch <span class="accent">}</span></h2>
+                <div class="contact-content">
+                    <div class="contact-info" data-aos="fade-right">
+                        <div class="contact-card">
+                            <h3 class="contact-info-title">Contact Information</h3>
+                            <p>Feel free to reach out to me via any of these channels. I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
+                            
+                            <div class="contact-details">
+                                <div class="contact-item">
+                                    <i class="fas fa-envelope"></i>
+                                    <div class="contact-item-content">
+                                        <h4>Email</h4>
+                                        <p>munibakarr@gmail.com</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- <div class="contact-item">
+                                    <i class="fas fa-phone"></i>
+                                    <div class="contact-item-content">
+                                        <h4>Phone</h4>
+                                        <p>+90 531 548 30 29</p>
+                                    </div>
+                                </div> -->
+                                
+                                <div class="contact-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <div class="contact-item-content">
+                                        <h4>Location</h4>
+                                        <p>Muğla, Turkey</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-social">
+                                <h4>Find Me On</h4>
+                                <div class="social-links">
+                                    <a href="https://github.com/munibakar" target="_blank" class="social-link">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                    <a href="https://www.linkedin.com/in/münibakar" target="_blank" class="social-link">
+                                        <i class="fab fa-linkedin-in"></i>
+                                    </a>
+                                    <a href="mailto:munibakarr@gmail.com" class="social-link">
+                                        <i class="fas fa-envelope"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                        <!-- <!-- <div class="contact-form" data-aos="fade-left">
+                            <div class="form-container">
+                                <h3 class="form-title">Send Me a Message</h3>
+                                <form id="contactForm">
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input type="text" id="name" class="form-control" placeholder="Your name" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" id="email" class="form-control" placeholder="Your email address" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="subject">Subject</label>
+                                        <input type="text" id="subject" class="form-control" placeholder="What is this regarding?" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="message">Message</label>
+                                        <textarea id="message" class="form-control" placeholder="Your message..." required></textarea>
+                                    </div>
+                                    
+                                    <button type="submit" class="submit-btn">
+                                        <i class="fas fa-paper-plane"></i> Send Message
+                                    </button>
+                                    
+                                    <div id="formSuccess" class="form-message success">
+                                        Your message has been sent successfully! I'll get back to you as soon as possible.
+                                    </div>
+                                    
+                                    <div id="formError" class="form-message error">
+                                        Oops! Something went wrong. Please try again later.
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                
+                <div class="code-decoration code-top-left">
+                    01001000 01100101 01101100 01101100 01101111<br>
+                    01010111 01101111 01110010 01101100 01100100<br>
+                    function sendMessage() {<br>
+                    &nbsp;&nbsp;return new Promise(resolve => {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;// Establishing connection...<br>
+                    &nbsp;&nbsp;});<br>
+                    }
+                </div>
+                
+                <div class="code-decoration code-bottom-right">
+                    // End of transmission<br>
+                    01000111 01101111 01101111 01100100 01100010 01111001 01100101<br>
+                    function closeConnection() {<br>
+                    &nbsp;&nbsp;return new Promise(resolve => {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;// Closing secure channel...<br>
+                    &nbsp;&nbsp;});<br>
+                    }
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <p>&copy; <span id="year">2025</span> Münib Akar | <span class="typing-cursor">_</span></p>
+                    <div class="footer-links">
+                        <a href="about.html">About</a>
+                        <a href="skills.html">Skills</a>
+                        <a href="projects.html">Projects</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <script src="scripts.js"></script>
+        <script>
+            // Contact form handling
+            document.addEventListener('DOMContentLoaded', function() {
+                const contactForm = document.getElementById('contactForm');
+                const formSuccess = document.getElementById('formSuccess');
+                const formError = document.getElementById('formError');
+                
+                if (contactForm) {
+                    contactForm.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        
+                        // Get form values
+                        const name = document.getElementById('name').value;
+                        const email = document.getElementById('email').value;
+                        const subject = document.getElementById('subject').value;
+                        const message = document.getElementById('message').value;
+                        
+                        // Validate form (simple validation)
+                        if (!name || !email || !subject || !message) {
+                            formError.style.display = 'block';
+                            formError.textContent = 'Please fill in all fields.';
+                            formSuccess.style.display = 'none';
+                            return;
+                        }
+                        
+                        // Email validation
+                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        if (!emailRegex.test(email)) {
+                            formError.style.display = 'block';
+                            formError.textContent = 'Please enter a valid email address.';
+                            formSuccess.style.display = 'none';
+                            return;
+                        }
+                        
+                        // In a real application, you would send the form data to a server here
+                        // For now, just show success message and reset form
+                        
+                        // Show success message
+                        formSuccess.style.display = 'block';
+                        formError.style.display = 'none';
+                        
+                        // Reset form
+                        contactForm.reset();
+                        
+                        // Hide success message after 5 seconds
+                        setTimeout(() => {
+                            formSuccess.style.display = 'none';
+                        }, 5000);
+                    });
+                }
+            });
+        </script>
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+        <script>
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true,
+                offset: 100
+            });
+        </script> -->
+</body>
+</html> 
